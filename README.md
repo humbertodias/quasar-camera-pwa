@@ -59,3 +59,9 @@ dist/pwa
 ## Icons
 
 https://pictogrammers.com/library/mdi/
+
+## Chrome
+
+Go to chrome://flags
+Locate the allow-insecure-localhost flag in the list.
+Select the "Enabled" option from the flag's dropdown.

@@ -80,7 +80,6 @@ module.exports = configure(function (ctx) {
     devServer: {
       https: true,
       server: {
-        type: "http",
         options: {
           // Use ABSOLUTE paths or path.join(__dirname, 'root/relative/path')
           key: fs.readFileSync("public/domain.key"),
@@ -90,7 +89,7 @@ module.exports = configure(function (ctx) {
           //          passphrase: 'webpack-dev-server' // do you need it?
         },
       },
-      port: 8080,
+      port: ctx.mode.spa ? 8000 : ctx.mode.pwa ? 443 : 9090,
       open: true, // opens browser window automatically
     },
 
