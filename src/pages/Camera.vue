@@ -54,7 +54,8 @@ export default {
           this.$refs.videoplay.srcObject = mediaStream;
           this.track = mediaStream.getVideoTracks()[0];
           this.imageCapture = new ImageCapture(this.track);
-        });
+        })
+        .catch((error) => console.error(error));
     },
     takePhoto() {
       this.imageCapture
@@ -68,7 +69,7 @@ export default {
             console.log(reader.result);
           };
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.error(error));
     },
   },
 };
