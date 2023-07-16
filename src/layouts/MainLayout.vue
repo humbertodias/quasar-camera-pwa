@@ -13,7 +13,7 @@
 
         <q-toolbar-title> Quasar App </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div>Quasar v{{ $q.version }} / {{ appVersion }}</div>
       </q-toolbar>
     </q-header>
 
@@ -38,6 +38,8 @@
 <script>
 import { defineComponent, ref } from "vue";
 import EssentialLink from "components/EssentialLink.vue";
+
+const { version } = require("../../package.json");
 
 const linksList = [
   {
@@ -105,6 +107,11 @@ export default defineComponent({
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;
       },
+    };
+  },
+  data() {
+    return {
+      appVersion: version,
     };
   },
 });
