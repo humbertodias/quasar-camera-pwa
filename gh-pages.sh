@@ -11,6 +11,7 @@ build_push_gh_pages(){
   quasar build -m pwa
   TMP_DIR="/tmp/pwa-$(date +'%Y_%m_%d %H:%M:%S')"
   cp -r dist/pwa "$TMP_DIR" && \
+  git reset HEAD --hard && \
   git checkout gh-pages && \
   rm -rf * && \
   cp -r "$TMP_DIR"/* . && \
@@ -19,8 +20,9 @@ build_push_gh_pages(){
   git push
 }
 
-# build
+OLD_BRANCH=`git rev-parse --abbrev-ref HEAD`
 
 change_app_version
 build_push_gh_pages
 
+git checkout "$OLD_BRANCH"
