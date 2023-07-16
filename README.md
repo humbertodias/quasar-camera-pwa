@@ -2,6 +2,10 @@
 
 A Quasar Project
 
+Demo
+
+https://humbertodias.github.io/quasar-pwa
+
 ## Install the dependencies
 
 ```bash
