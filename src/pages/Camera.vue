@@ -3,7 +3,7 @@
     <p class="text-h6">Camera</p>
     <div class="row">
       <div class="col-12 text-center">
-        <video autoplay width="250rem" ref="videoplay"></video>
+        <video autoplay width="250" ref="videoplay"></video>
       </div>
       <div class="col-12 text-center">
         <q-btn
@@ -23,7 +23,7 @@
         />
       </div>
       <div class="col-12 text-center">
-        <img src="" ref="imgTakePhoto" width="250rem" />
+        <img src="" ref="imgTakePhoto" width="250" />
       </div>
     </div>
   </q-page>
