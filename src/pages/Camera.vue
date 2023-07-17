@@ -70,10 +70,33 @@ export default {
       }
     },
     // https://developer.mozilla.org/en-US/docs/Web/API/Navigator/permissions
-    checkPermission() {
-      navigator.permissions.query({ name: "camera" }).then((result) => {
-        console.log("permission", result);
-      });
+    // https://www.w3.org/TR/permissions/
+    async checkPermission() {
+      const devices = await navigator.mediaDevices.enumerateDevices();
+
+      // filter on video inputs, and map to query object
+      const queries = devices
+        .filter(({ kind }) => kind === "videoinput")
+        .map(({ deviceId }) => ({ name: "camera", deviceId }));
+
+      const promises = queries.map((queryObj) =>
+        navigator.permissions.query(queryObj)
+      );
+
+      try {
+        const results = await Promise.all(promises);
+        let countGrantedCamera = results.filter(
+          (state) => state != "granted"
+        ).length;
+        if (countGrantedCamera < 1) {
+          alert("Camera com acesso bloqueado. Conceda o acesso");
+        }
+        console.log("countGrantedCamera", countGrantedCamera);
+        // log the state of each camera
+        results.forEach(({ state }, i) => console.log("Camera", i, state));
+      } catch (error) {
+        console.error(error);
+      }
     },
     // https://developer.mozilla.org/en-US/docs/Web/API/Notification/permission_static
     notifyMe() {
