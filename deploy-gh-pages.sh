@@ -1,4 +1,5 @@
 #!/bin/bash
+
 change_app_version(){
   BRANCH=`git rev-parse --abbrev-ref HEAD`
   REV=`git rev-parse --short HEAD`
@@ -16,7 +17,7 @@ build_push_gh_pages(){
   rm -rf * && \
   cp -r "$TMP_DIR"/* . && \
   git add . && \
-  git commit . -m "gh-pages.sh" && \
+  git commit . -m "deploy-gh-pages.sh" && \
   git push
 }
 
