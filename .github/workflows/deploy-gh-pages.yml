@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
@@ -20,9 +20,10 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      - name: Install
-        run: npm ci
-      - name: Build
-        run: npm run build
       - name: Deploy
         run: ./deploy-gh-pages.sh
+
+# Ref
+# 1. https://github.com/actions/checkout
+# 2. https://github.com/actions/setup-node
+# 3. https://github.com/actions/cache
