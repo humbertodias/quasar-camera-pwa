@@ -4,7 +4,7 @@ A Quasar Project
 
 Demo
 
-https://humbertodias.github.io/quasar-pwa
+https://humbertodias.github.io/quasar-camera-pwa
 
 ## Install the dependencies
 

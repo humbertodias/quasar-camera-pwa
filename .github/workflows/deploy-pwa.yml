@@ -1,4 +1,4 @@
-name: Build & Deploy to GitHub Pages
+name: Deploy PWA to GitHub Pages
 on:
   push:
     branches:
@@ -10,11 +10,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: "10.x"
       - name: Cache
-        uses: actions/cache@v1
+        uses: actions/cache@v3
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -24,6 +24,6 @@ jobs:
         run: ./deploy-gh-pages.sh
 
 # Ref
-# 1. https://github.com/actions/checkout
-# 2. https://github.com/actions/setup-node
-# 3. https://github.com/actions/cache
+# https://github.com/actions/checkout
+# https://github.com/actions/setup-node
+# https://github.com/actions/cache
