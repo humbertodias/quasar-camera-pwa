@@ -11,4 +11,4 @@ QENV="${1:-local}"
 pwd && \
 ls -lha && \
 change_app_version && \
-docker run -e QENV=$QENV -v $(pwd):/tmp/app hldtux/quasar-apk bash -c "cd /tmp/app/src-cordova/platforms/android; gradle build ; find . -name '*.apk'"
+docker run -e QENV=$QENV -v $(pwd)/src-cordova/platforms/android:/tmp/android hldtux/quasar-apk

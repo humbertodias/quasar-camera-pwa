@@ -66,3 +66,5 @@ RUN sdkmanager --update
 RUN sdkmanager "build-tools;$ANDROID_BUILD_TOOLS_VERSION" \
     "platforms;android-$ANDROID_VERSION" \
     "platform-tools"
+
+ENTRYPOINT ["bash", "-c", "gradle build && find . -name '*.apk'"]
