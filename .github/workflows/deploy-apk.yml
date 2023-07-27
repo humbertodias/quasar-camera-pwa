@@ -28,4 +28,4 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - name: Deploy
-        run: ./deploy-apk.sh
+        run: ./script/deploy-apk.sh
