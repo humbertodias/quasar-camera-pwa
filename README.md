@@ -1,3 +1,5 @@
+[![Deploy PWA to GitHub Pages](https://github.com/humbertodias/quasar-camera-pwa/actions/workflows/deploy-pwa.yml/badge.svg)](https://github.com/humbertodias/quasar-camera-pwa/actions/workflows/deploy-pwa.yml)
+
 # Quasar App (quasar-pwa)
 
 A Quasar Project
