@@ -1,4 +1,14 @@
 #!/bin/bash
 
+change_app_version(){
+  BRANCH=`git rev-parse --abbrev-ref HEAD`
+  REV=`git rev-parse --short HEAD`
+  jq ".version=\"$BRANCH:$REV\"" package.json > /tmp/package.json
+  mv /tmp/package.json package.json
+}
+
 QENV="${1:-local}"
-docker run -v $(pwd)/..:/tmp/app -w /tmp/app hldtux/quasar-apk bash build-apk.sh $QENV
+APP_DIR=$(readlink -f `pwd`/..)
+cd $APP_DIR
+change_app_version
+docker run -e QENV=$QENV -v .:/tmp/app hldtux/quasar-apk

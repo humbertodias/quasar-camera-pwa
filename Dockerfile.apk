@@ -1,7 +1,7 @@
 FROM node
 
 # Install Build Essentials
-RUN apt update && apt install curl wget zip unzip build-essential file apt-utils -y
+RUN apt update && apt install curl wget zip unzip build-essential file apt-utils jq -y
 
 # cordova
 ARG NPM_VERSION=latest
@@ -67,5 +67,4 @@ RUN sdkmanager "build-tools;$ANDROID_BUILD_TOOLS_VERSION" \
     "platforms;android-$ANDROID_VERSION" \
     "platform-tools"
 
-WORKDIR /tmp/app
-COPY build-apk.sh .
+CMD ["/bin/bash", "-c", "cd /tmp/app/src-cordova/platforms/android; gradle build ; find . -name '*.apk'"]
