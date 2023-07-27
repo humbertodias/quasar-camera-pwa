@@ -3,11 +3,13 @@
 export QENV="${1:-local}"
 echo "QENV=$QENV"
 
+pwd
+
 # Cordova
 npm install --no-audit
 
 # Android - Configure
-#export JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules java.xml.bind'
+# export JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules java.xml.bind'
 cd src-cordova
 cordova requirements android
 
