@@ -16,6 +16,7 @@ export default defineComponent({
   name: 'IndexPage',
   methods: {
     keyUpEnter(){
+      console.log('keyUpEnter')
       this.$bus.emit('enter-event', 'arg1 value', 'arg2 value', 'arg3 value')
     }
   }

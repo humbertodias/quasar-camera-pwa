@@ -43,6 +43,11 @@ const { version } = require("../../package.json");
 
 const linksList = [
   {
+    title: "Home",
+    icon: "home",
+    link: "#",
+  },
+  {
     title: "Camera",
     icon: "camera",
     link: "#camera",
