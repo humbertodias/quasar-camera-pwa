@@ -1,11 +1,12 @@
 FROM node
 
 # Install Build Essentials
-RUN apt update && apt install curl wget zip unzip build-essential -y && apt install file -y && apt install apt-utils -y
+RUN apt update && apt install curl wget zip unzip build-essential file apt-utils -y
 
 # cordova
 ARG NPM_VERSION=latest
-RUN npm install -g npm@$NPM_VERSION && npm install -g cordova
+ARG CORDOVA_VERSION=latest
+RUN npm install -g npm@$NPM_VERSION && npm install -g cordova@$CORDOVA_VERSION
 
 # non-root
 RUN adduser --disabled-password --gecos '' ci
