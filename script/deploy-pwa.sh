@@ -22,9 +22,7 @@ build_push_gh_pages(){
   git push
 }
 
-OLD_BRANCH=`git rev-parse --abbrev-ref HEAD`
-
-change_app_version
-build_push_gh_pages
-
+OLD_BRANCH=`git rev-parse --abbrev-ref HEAD` && \
+change_app_version && \
+build_push_gh_pages && \
 git checkout "$OLD_BRANCH"
