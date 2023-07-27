@@ -1,8 +1,9 @@
 name: Deploy PWA to GitHub Pages
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "Deploy PWA"
 jobs:
   build:
     runs-on: ubuntu-latest

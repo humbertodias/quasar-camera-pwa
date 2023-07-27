@@ -1,8 +1,9 @@
 name: Deploy APK to GitHub Pages
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "Deploy APK"
 jobs:
   build:
     runs-on: ubuntu-latest
