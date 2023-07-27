@@ -1,6 +1,8 @@
 create-keystore:
 	keytool -genkey -v -keystore android.keystore -alias android -keyalg RSA -sigalg SHA1withRSA -keysize 2048 -validity 10000
 
-android-build:
-#	docker build - < Dockerfile.android -t android-sdk
+android-sdk:
 	docker build - < Dockerfile.apk -t android-sdk
+
+deploy-apk: android-sdk
+  docker run -v .:/tmp/app -w /tmp/app -it android-sdk bash ./script/deploy-apk-local.sh

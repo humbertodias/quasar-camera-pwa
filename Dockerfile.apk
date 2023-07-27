@@ -1,23 +1,68 @@
-FROM gradle:jdk8-focal
+FROM node
 
-USER root
+# Install Build Essentials
+RUN apt update && apt install curl wget zip unzip build-essential -y && apt install file -y && apt install apt-utils -y
+
+# cordova
+ARG NPM_VERSION=latest
+RUN npm install -g npm@$NPM_VERSION && npm install -g cordova
+
+# non-root
+RUN adduser --disabled-password --gecos '' ci
+USER ci
+WORKDIR /home/ci
+ENV HOME /home/ci
+
+# bash as default
+SHELL ["/bin/bash", "-c"]
+
+# sdkman
+RUN curl -s "https://get.sdkman.io" | bash
+ENV SDKMAN_HOME=$HOME/.sdkman
+ARG JAVA_VERSION=17.0.8-amzn
+ARG GRADLE_VERSION=7.6
+
+# java/gradle
+RUN source "$SDKMAN_HOME/bin/sdkman-init.sh" && sdk install java $JAVA_VERSION && sdk install gradle $GRADLE_VERSION
+ENV JAVA_HOME=$SDKMAN_HOME/candidates/java/current
+ENV GRADLE_HOME=$SDKMAN_HOME/candidates/gradle/current
+
+# https://en.wikipedia.org/wiki/Android_version_history
 ENV SDK_URL="https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip" \
-    ANDROID_HOME="/usr/local/android-sdk" \
+    ANDROID_HOME="/home/ci/android/sdk" \
+    ANDROID_SDK_ROOT="/home/ci/android/sdk" \
+    # ANDROID_VERSION=27 \
+    # ANDROID_BUILD_TOOLS_VERSION=27.0.3
     ANDROID_VERSION=33 \
     ANDROID_BUILD_TOOLS_VERSION=33.0.2
 
+ARG ANDROID_SDK_VERSION=9477386
+RUN mkdir -p ${ANDROID_HOME}/cmdline-tools && \
+    wget -q https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_VERSION}_latest.zip && \
+    unzip *tools*linux*.zip -d ${ANDROID_HOME}/cmdline-tools && \
+    mv ${ANDROID_HOME}/cmdline-tools/cmdline-tools ${ANDROID_HOME}/cmdline-tools/tools && \
+    rm *tools*linux*.zip
+
+# Env
+ENV ANDROID_BUILD_TOOLS_HOME=$ANDROID_HOME/build-tools/$ANDROID_BUILD_TOOLS_VERSION
+ENV PATH=$PATH:$ANDROID_BUILD_TOOLS_HOME:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools:$ANDROID_HOME/cmdline-tools/tools/bin
+ENV PATH=$PATH:$GRADLE_HOME/bin:$JAVA_HOME/bin
+# WORKAROUND: for issue https://issuetracker.google.com/issues/37137213
+ENV LD_LIBRARY_PATH=$ANDROID_HOME/emulator/lib64:$ANDROID_HOME/emulator/lib64/qt/lib
+
 # Download Android SDK
-RUN mkdir "$ANDROID_HOME" .android \
+RUN mkdir -p "$ANDROID_HOME" $HOME/.android \
+    && touch $HOME/.android/repositories.cfg \
     && cd "$ANDROID_HOME" \
     && curl -o sdk.zip $SDK_URL \
     && unzip sdk.zip \
     && rm sdk.zip \
     && mkdir "$ANDROID_HOME/licenses" || true \
-#    && echo "24333f8a63b6825ea9c5514f83c2829b004d1fee" > "$ANDROID_HOME/licenses/android-sdk-license"
-    && yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses
+    && yes | sdkmanager --licenses
 
 # Install Android Build Tool and Libraries
-RUN $ANDROID_HOME/tools/bin/sdkmanager --update
-RUN $ANDROID_HOME/tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" \
-    "platforms;android-${ANDROID_VERSION}" \
-    "platform-tools"# Install Build EssentialsRUN apt update && apt install build-essential -y && apt install file -y && apt install apt-utils -y
+RUN sdkmanager --update
+RUN sdkmanager "build-tools;$ANDROID_BUILD_TOOLS_VERSION" \
+    "platforms;android-$ANDROID_VERSION" \
+    "platform-tools"
+

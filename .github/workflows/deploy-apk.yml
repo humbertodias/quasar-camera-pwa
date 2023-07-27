@@ -1,0 +1,31 @@
+name: Deploy APK to GitHub Pages
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: set git config
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config --global user.email "${GITHUB_ACTOR}"
+          git config --global user.name "${GITHUB_ACTOR}@users.noreply.github.com"
+          git config -l
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+      - name: Cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Deploy
+        run: ./deploy-apk.sh
