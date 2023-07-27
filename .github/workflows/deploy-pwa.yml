@@ -21,7 +21,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - name: Deploy
-        run: ./script/deploy-gh-pages.sh
+        run: ./script/deploy-pwa.sh
 
 # Ref
 # https://github.com/actions/checkout
