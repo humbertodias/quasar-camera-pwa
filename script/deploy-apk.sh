@@ -11,4 +11,7 @@ QENV="${1:-local}"
 pwd && \
 ls -lha && \
 change_app_version && \
-docker run -e QENV=$QENV -v $(pwd)/src-cordova/platforms/android:/tmp/android hldtux/quasar-apk
+docker run -e QENV=$QENV \
+-v $(pwd)/src-cordova/platforms/android:/tmp/android \
+- w /tmp/android \
+hldtux/quasar-apk
