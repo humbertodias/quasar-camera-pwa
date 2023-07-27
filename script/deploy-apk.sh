@@ -8,8 +8,10 @@ change_app_version(){
 }
 
 QENV="${1:-local}"
-SCRIPT_DIRNAME=`dirname -- "$0"`
-PROJECT_DIRNAME=$SCRIPT_DIRNAME/../src-cordova/platforms/android
+
+SCRIPT_PATH=`readlink -f "$0"`
+SCRIPT_DIR=`dirname "$SCRIPT_PATH"`
+PROJECT_DIRNAME=`readlink -f $SCRIPT_DIR/../src-cordova/platforms/android`
 
 pwd && \
 echo $SCRIPT_DIRNAME && \
