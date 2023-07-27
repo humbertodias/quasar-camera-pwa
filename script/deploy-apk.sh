@@ -8,10 +8,15 @@ change_app_version(){
 }
 
 QENV="${1:-local}"
+SCRIPT_DIRNAME=`dirname -- "$0"`
+PROJECT_DIRNAME=$SCRIPT_DIRNAME/../src-cordova/platforms/android
+
 pwd && \
+echo $SCRIPT_DIRNAME && \
+echo $PROJECT_DIRNAME && \
 ls -lha && \
 change_app_version && \
 docker run -e QENV=$QENV \
--v $(pwd)/src-cordova/platforms/android:/tmp/android \
+-v $PROJECT_DIRNAME:/tmp/android \
 -w /tmp/android \
-hldtux/quasar-apk
+hldtux/quasar-apk gradle build && find . -name '*.apk'
