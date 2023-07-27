@@ -18,7 +18,7 @@ build_push_gh_pages(){
   rm -rf * && \
   cp -r "$TMP_DIR"/* . && \
   git add . && \
-  git commit . -m "deploy-gh-pages.sh" && \
+  git commit . -m "deploy-pwa.sh" --author=. && \
   git push
 }
 
