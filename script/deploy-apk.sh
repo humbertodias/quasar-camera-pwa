@@ -7,29 +7,13 @@ change_app_version(){
   mv /tmp/package.json package.json
 }
 
-cordova_add_android(){
-
-  pwd
-
-  cd src-cordova
-  npm install -g cordova@latest
-  cordova platform add android
-  cd ..
-
-  pwd
-
-}
-
 QENV="${1:-local}"
 
-
-
-PROJECT_DIR=$(pwd)/src-cordova/platforms/android
+PROJECT_DIR=$(pwd)/src-cordova
 echo "PROJECT_DIR=$PROJECT_DIR"
 
-cordova_add_android && \
 change_app_version && \
 docker run -e QENV=$QENV \
 -v $PROJECT_DIR:/tmp/android \
 -w /tmp/android \
-hldtux/quasar-apk gradle build && find . -name '*.apk'
+hldtux/quasar-apk cordova build android && cd platforms/android && gradle build && find . -name '*.apk'
