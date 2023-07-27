@@ -66,5 +66,3 @@ RUN sdkmanager --update
 RUN sdkmanager "build-tools;$ANDROID_BUILD_TOOLS_VERSION" \
     "platforms;android-$ANDROID_VERSION" \
     "platform-tools"
-
-CMD ["/bin/bash", "-c", "cd /tmp/app/src-cordova/platforms/android; gradle build ; find . -name '*.apk'"]
