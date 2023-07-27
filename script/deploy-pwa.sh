@@ -8,9 +8,10 @@ change_app_version(){
 }
 
 build_push_gh_pages(){
-  npm i
-  quasar build -m pwa
   TMP_DIR="/tmp/pwa-$(date +'%Y_%m_%d %H:%M:%S')"
+  npm install -g @quasar/cli && \
+  npm install && \
+  quasar build -m pwa && \
   cp -r dist/pwa "$TMP_DIR" && \
   git reset HEAD --hard && \
   git checkout gh-pages && \
