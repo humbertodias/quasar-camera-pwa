@@ -10,7 +10,8 @@ change_app_version(){
 QENV="${1:-local}"
 
 cd src-cordova && cordova platform add android
-PROJECT_DIR=$(pwd)/src-cordova/platforms/android
+
+PROJECT_DIR=$(pwd)/platforms/android
 echo "PROJECT_DIR=$PROJECT_DIR"
 
 change_app_version && \
