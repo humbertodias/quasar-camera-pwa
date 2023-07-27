@@ -10,5 +10,5 @@ change_app_version(){
 QENV="${1:-local}"
 cd .. && \
 pwd && \
-change_app_version && \
+ls -lha && \
 docker run -e QENV=$QENV -v $APP_DIR:/tmp/app hldtux/quasar-apk
