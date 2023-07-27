@@ -11,9 +11,9 @@ cordova_add_android(){
 
   pwd
 
-  npm install -g cordova@latest && \
-  cd src-cordova && \
-  cordova platform add android && \
+  cd src-cordova
+  npm install -g cordova@latest
+  cordova platform add android
   cd ..
 
   pwd
