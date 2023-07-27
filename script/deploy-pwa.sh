@@ -10,8 +10,9 @@ change_app_version(){
 build_push_gh_pages(){
   TMP_DIR="/tmp/pwa-$(date +'%Y_%m_%d %H:%M:%S')"
   npm install && \
-  npm build:pwa && \
+  npm run build:pwa && \
   cp -r dist/pwa "$TMP_DIR" && \
+  git fetch -a && \
   git reset HEAD --hard && \
   git checkout gh-pages && \
   rm -rf * && \
