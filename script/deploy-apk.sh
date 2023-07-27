@@ -8,8 +8,11 @@ change_app_version(){
 }
 
 QENV="${1:-local}"
+
+cd src-cordova && cordova platform add android
 PROJECT_DIR=$(pwd)/src-cordova/platforms/android
 echo "PROJECT_DIR=$PROJECT_DIR"
+
 change_app_version && \
 docker run -e QENV=$QENV \
 -v $PROJECT_DIR:/tmp/android \
