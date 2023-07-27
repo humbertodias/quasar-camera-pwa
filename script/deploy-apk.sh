@@ -11,7 +11,7 @@ QENV="${1:-local}"
 
 SCRIPT_PATH=`readlink -f "$0"`
 SCRIPT_DIR=`dirname "$SCRIPT_PATH"`
-PROJECT_DIR=`readlink -f "$SCRIPT_DIR/../src-cordova/platforms/android"`
+PROJECT_DIR="$SCRIPT_DIR/../src-cordova/platforms/android"
 
 pwd
 echo "SCRIPT_DIR=$SCRIPT_DIR"
