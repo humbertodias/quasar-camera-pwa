@@ -1,0 +1,26 @@
+FROM ubuntu
+
+# bash as default
+SHELL ["/bin/bash", "-c"]
+
+RUN apt update && apt install curl wget zip unzip -y
+RUN curl -s "https://get.sdkman.io" | bash && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+RUN adduser --disabled-password --gecos '' ci
+USER ci
+WORKDIR /home/ci
+ENV HOME /home/ci
+
+# download and install Android SDK
+# https://developer.android.com/studio#command-line-tools-only
+ARG ANDROID_SDK_VERSION=9477386
+ENV ANDROID_HOME "$HOME/Android/Sdk"
+RUN mkdir -p ${ANDROID_HOME}/cmdline-tools && \
+    wget -q https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_VERSION}_latest.zip && \
+    unzip *tools*linux*.zip -d ${ANDROID_HOME}/cmdline-tools && \
+    mv ${ANDROID_HOME}/cmdline-tools/cmdline-tools ${ANDROID_HOME}/cmdline-tools/tools && \
+    rm *tools*linux*.zip
+
+ENV PATH ${PATH}:${ANDROID_HOME}/cmdline-tools/latest/bin:${ANDROID_HOME}/cmdline-tools/tools/bin:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/emulator
+# WORKAROUND: for issue https://issuetracker.google.com/issues/37137213
+ENV LD_LIBRARY_PATH ${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib
