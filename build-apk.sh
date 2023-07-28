@@ -1,7 +1,7 @@
 pwd && ls -lha
 cd src-cordova && \
 pwd && ls -lha && \
-cordova build android && \
+cordova platform add android && \
 pwd && ls -lha && \
 cd platforms/android && \
 pwd && ls -lha && \
