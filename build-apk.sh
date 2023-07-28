@@ -1,10 +1,10 @@
-pwd
+pwd && ls -lha
 cd src-cordova && \
-pwd && \
+pwd && ls -lha && \
 cordova build android && \
-pwd && \
+pwd && ls -lha && \
 cd platforms/android && \
-pwd && \
+pwd && ls -lha && \
 gradle build && \
-pwd && \
+pwd && ls -lha && \
 find . -name '*.apk'
