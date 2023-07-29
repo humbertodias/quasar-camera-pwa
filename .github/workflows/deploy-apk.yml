@@ -33,4 +33,4 @@ jobs:
           docker run -e QENV=local \
           -v $(pwd)/src-cordova:/tmp/src-cordova \
           -w /tmp/src-cordova \
-          hldtux/quasar-apk bash -c "pwd && ls -lha && cordova platform add android ; cordova build android"
+          hldtux/quasar-apk bash -c "pwd && ls -lha && npm i && cordova platform add android ; cordova build android"
