@@ -67,4 +67,4 @@ RUN sdkmanager "build-tools;$ANDROID_BUILD_TOOLS_VERSION" \
     "platforms;android-$ANDROID_VERSION" \
     "platform-tools"
 
-WORKDIR /tmp/android
+WORKDIR /tmp/quasar
