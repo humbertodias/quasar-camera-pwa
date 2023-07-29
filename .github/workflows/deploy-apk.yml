@@ -20,6 +20,6 @@ jobs:
       - name: Deploy
         run: |
           docker run -e QENV=local \
-          -v $(pwd)/src-cordova:/tmp/src-cordova \
-          -w /tmp/src-cordova \
-          hldtux/quasar-apk bash -c "pwd && ls -lha && npm run build-apk"
+          -v $(pwd):/tmp/quasar-workdir \
+          -w /tmp/quasar-workdir \
+          hldtux/quasar-apk bash -c "npm run build:android && cd src-cordova && npm run build:apk"
