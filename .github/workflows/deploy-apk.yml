@@ -22,4 +22,4 @@ jobs:
           docker run -e QENV=local \
           -v $(pwd):/tmp/quasar-workdir \
           -w /tmp/quasar-workdir \
-          hldtux/quasar-apk bash -c "npm i && npm run build:android && cd src-cordova && npm i && npm run build:apk"
+          hldtux/quasar-apk bash -c "npm i && npm run build:android && cd src-cordova && npm run build:apk"
