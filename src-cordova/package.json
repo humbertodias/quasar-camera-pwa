@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:apk": "npm i && cordova platform add android@latest ; cordova build android"
+    "build:apk": "cordova platform add android@latest ; cordova build android"
   },
   "keywords": [
     "ecosystem:cordova"
