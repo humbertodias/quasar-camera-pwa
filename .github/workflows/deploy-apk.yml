@@ -33,7 +33,7 @@ jobs:
           docker run -e QENV=local \
           -v $(pwd)/src-cordova:/tmp/src-cordova \
           -w /tmp/src-cordova \
-          hldtux/quasar-apk bash -c cordova platform add android@$latest && \
+          hldtux/quasar-apk bash -c cordova platform add android@latest && \
           cd platforms/android && \
           gradle build && \
           find . -name '*.apk'
