@@ -29,8 +29,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - name: Deploy
+        working-directory: src-cordova
         run: |
           docker run -e QENV=local \
-          -v $(pwd)/src-cordova:/tmp/src-cordova \
+          -v $(pwd):/tmp/src-cordova \
           -w /tmp/src-cordova \
           hldtux/quasar-apk npm run build-apk
