@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          path: 'src-cordova'
       - name: set git config
         env:
           GH_TOKEN: ${{ github.token }}
@@ -17,20 +19,9 @@ jobs:
           git config --global user.email "${GITHUB_ACTOR}"
           git config --global user.name "${GITHUB_ACTOR}@users.noreply.github.com"
           git config -l
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: "18.x"
-      - name: Cache
-        uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
       - name: Deploy
         run: |
           docker run -e QENV=local \
-          -v $(pwd)/src-cordova:/tmp/src-cordova \
+          -v $(pwd):/tmp/src-cordova \
           -w /tmp/src-cordova \
-          hldtux/quasar-apk bash -c "pwd && ls -lha && npm i && cordova platform add android ; cordova build android"
+          hldtux/quasar-apk bash -c "pwd && ls -lha && npm run build-apk"
