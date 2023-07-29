@@ -30,15 +30,10 @@ jobs:
             ${{ runner.os }}-node-
       - name: Deploy
         run: |
-          cd src-cordova && \
-          pwd && ls -lha
-
-          ANDROID_VERSION=latest
-          cordova platform add android@$ANDROID_VERSION
-          pwd && ls -lha && \
+          docker run -e QENV=local \
+          -v $(pwd)/src-cordova:/tmp/scr-cordova \
+          -w /tmp//scr-cordova \
+          hldtux/quasar-apk bash cordova platform add android@$latest && \
           cd platforms/android && \
-          pwd && ls -lha && \
           gradle build && \
-
-          pwd && ls -lha && \
           find . -name '*.apk'
