@@ -33,4 +33,4 @@ jobs:
           docker run -e QENV=local \
           -v ${{ github.workspace }}/src-cordova:/tmp/src-cordova \
           -w /tmp/src-cordova \
-          hldtux/quasar-apk bash ls -lha
+          hldtux/quasar-apk bash -c "pwd && ls -lha"
