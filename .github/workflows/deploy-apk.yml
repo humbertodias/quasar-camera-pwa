@@ -31,6 +31,6 @@ jobs:
       - name: Deploy
         run: |
           docker run -e QENV=local \
-          -v ${{ github.workspace }}/src-cordova:/tmp/src-cordova \
+          -v $(pwd)/src-cordova:/tmp/src-cordova \
           -w /tmp/src-cordova \
-          hldtux/quasar-apk bash -c "pwd && ls -lha"
+          hldtux/quasar-apk bash -c "pwd && ls -lha && cordova platform add android ; cordova build android"
