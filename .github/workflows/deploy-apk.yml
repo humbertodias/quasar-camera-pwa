@@ -29,4 +29,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - name: Deploy
-        run: ./script/deploy-apk.sh
+        run: |
+          cd src-cordova && \
+          pwd && ls -lha
+
+          ANDROID_VERSION=latest
+          cordova platform add android@$ANDROID_VERSION
+          pwd && ls -lha && \
+          cd platforms/android && \
+          pwd && ls -lha && \
+          gradle build && \
+
+          pwd && ls -lha && \
+          find . -name '*.apk'
