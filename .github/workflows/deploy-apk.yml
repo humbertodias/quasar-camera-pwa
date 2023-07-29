@@ -31,8 +31,8 @@ jobs:
       - name: Deploy
         run: |
           docker run -e QENV=local \
-          -v $(pwd)/src-cordova:/tmp/scr-cordova \
-          -w /tmp//scr-cordova \
+          -v $(pwd)/src-cordova:/tmp/src-cordova \
+          -w /tmp/src-cordova \
           hldtux/quasar-apk bash cordova platform add android@$latest && \
           cd platforms/android && \
           gradle build && \
