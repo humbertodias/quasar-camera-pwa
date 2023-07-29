@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          path: 'src-cordova'
       - name: set git config
         env:
           GH_TOKEN: ${{ github.token }}
@@ -29,9 +31,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - name: Deploy
-        working-directory: src-cordova
         run: |
           docker run -e QENV=local \
-          -v $(pwd):/tmp/src-cordova \
+          -v .:/tmp/src-cordova \
           -w /tmp/src-cordova \
           hldtux/quasar-apk npm run build-apk
