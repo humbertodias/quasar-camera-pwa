@@ -33,8 +33,8 @@ ENV GRADLE_HOME=$SDKMAN_HOME/candidates/gradle/current
 
 # https://en.wikipedia.org/wiki/Android_version_history
 ENV SDK_URL="https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip" \
-    ANDROID_HOME="/home/ci/android/sdk" \
-    ANDROID_SDK_ROOT="/home/ci/android/sdk" \
+    ANDROID_HOME="$HOME/android/sdk" \
+    ANDROID_SDK_ROOT="$HOME/android/sdk" \
     # ANDROID_VERSION=27 \
     # ANDROID_BUILD_TOOLS_VERSION=27.0.3
     ANDROID_VERSION=33 \
@@ -70,4 +70,4 @@ RUN sdkmanager "build-tools;$ANDROID_BUILD_TOOLS_VERSION" \
     "platforms;android-$ANDROID_VERSION" \
     "platform-tools"
 
-WORKDIR /tmp/quasar
+WORKDIR /tmp/quasar-workdir
