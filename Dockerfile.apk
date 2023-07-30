@@ -28,8 +28,8 @@ RUN sudo npm install -g npm@$NPM_VERSION && \
 # sdkman
 RUN curl -s "https://get.sdkman.io" | bash
 ENV SDKMAN_HOME=$HOME/.sdkman
-ARG JAVA_VERSION=17.0.8-amzn
-ARG GRADLE_VERSION=7.6
+ENV JAVA_VERSION=17.0.8-amzn
+ENV GRADLE_VERSION=7.6
 
 # java/gradle
 RUN source "$SDKMAN_HOME/bin/sdkman-init.sh" && sdk install java $JAVA_VERSION && sdk install gradle $GRADLE_VERSION
