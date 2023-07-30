@@ -1,4 +1,4 @@
-name: Deploy APK to GitHub Pages
+name: Deploy APK to Release
 on:
   workflow_dispatch:
     inputs:
@@ -17,9 +17,10 @@ jobs:
           git config --global user.email "${GITHUB_ACTOR}"
           git config --global user.name "${GITHUB_ACTOR}@users.noreply.github.com"
           git config -l
-      - name: Deploy
-        run: |
-          docker run -e QENV=local \
-          -v $(pwd):/tmp/quasar-workdir \
-          -w /tmp/quasar-workdir \
-          hldtux/quasar-apk bash -c "npm i && npm run build:android && cd src-cordova && npm run build:apk"
+      - name: Build
+        run: build-apk.sh
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: apk
+          path: src-cordova/platforms/android/app/build/outputs/apk/debug/app-debug.apk
