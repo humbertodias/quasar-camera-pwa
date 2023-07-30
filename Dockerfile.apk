@@ -6,13 +6,13 @@ RUN apt update && apt install sudo git curl wget zip unzip build-essential file 
 RUN apt install ca-certificates
 
 # non-root
-ENV USER=ci
-ENV HOME=/home/ci
-USER $USER
-WORKDIR $HOME
+ENV USER=quasar
+ENV HOME=/home/$USER
 RUN adduser --disabled-password --gecos "" --shell /bin/bash $USER --home $HOME
 RUN adduser $USER sudo
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+USER $USER
+WORKDIR $HOME/workdir
 
 # bash as default
 SHELL ["/bin/bash", "-c"]

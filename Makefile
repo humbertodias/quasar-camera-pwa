@@ -11,8 +11,8 @@ build-push:
 
 run-it:
 	docker run -it -e QENV=local \
-  	-v `pwd`:/tmp/quasar-workdir \
-  	-w /tmp/quasar-workdir \
+  	-v `pwd`:/home/quasar/workdir \
+  	-w /home/quasar/workdir \
   	hldtux/quasar-apk bash
 
 clean:
