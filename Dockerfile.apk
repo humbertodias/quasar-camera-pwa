@@ -7,11 +7,11 @@ RUN apt install ca-certificates
 
 # non-root
 ENV USER=ci
-RUN adduser --disabled-password --gecos "" --shell /bin/bash $USER
+ENV HOME=/home/ci
+RUN adduser --disabled-password --gecos "" --shell /bin/bash $USER --home $HOME
 RUN adduser $USER sudo
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 USER ci
-ENV HOME=/home/ci
 WORKDIR $HOME
 
 # bash as default
