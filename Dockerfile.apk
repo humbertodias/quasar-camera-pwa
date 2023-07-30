@@ -8,11 +8,11 @@ RUN apt install ca-certificates
 # non-root
 ENV USER=ci
 ENV HOME=/home/ci
+USER ci
+WORKDIR $HOME
 RUN adduser --disabled-password --gecos "" --shell /bin/bash $USER --home $HOME
 RUN adduser $USER sudo
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-USER ci
-WORKDIR $HOME
 
 # bash as default
 SHELL ["/bin/bash", "-c"]
@@ -74,5 +74,3 @@ RUN sdkmanager --update
 RUN sdkmanager "build-tools;$ANDROID_BUILD_TOOLS_VERSION" \
     "platforms;android-$ANDROID_VERSION" \
     "platform-tools"
-
-WORKDIR /tmp/quasar-workdir
