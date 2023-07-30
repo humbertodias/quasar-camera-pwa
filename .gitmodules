@@ -1,3 +1,0 @@
-[submodule "src-cordova/cordova-plugin-sendkeystrokes"]
-	path = src-cordova/cordova-plugin-sendkeystrokes
-	url = https://github.com/humbertodias/cordova-plugin-sendkeystrokes
