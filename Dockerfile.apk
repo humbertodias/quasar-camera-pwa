@@ -8,7 +8,7 @@ RUN apt install ca-certificates
 # non-root
 ENV USER=ci
 ENV HOME=/home/ci
-USER ci
+USER $USER
 WORKDIR $HOME
 RUN adduser --disabled-password --gecos "" --shell /bin/bash $USER --home $HOME
 RUN adduser $USER sudo
