@@ -2,6 +2,8 @@ FROM node
 
 # Install Build Essentials
 RUN apt update && apt install sudo git curl wget zip unzip build-essential file apt-utils jq -y
+# Installing cert package will allow resolving the error to https://registry.npmjs.org/
+RUN apt install ca-certificates
 
 # non-root
 ENV USER=ci
