@@ -14,13 +14,15 @@
   "author": "Apache Cordova Team",
   "license": "Apache-2.0",
   "devDependencies": {
-    "cordova-android": "^12.0.0"
+    "cordova-android": "^12.0.0",
+    "cordova-plugin-sendkeystrokes": "github:keilyn3d/cordova-plugin-sendkeystrokes"
   },
   "cordova": {
     "platforms": [
       "android"
     ],
     "plugins": {
+      "cordova-plugin-sendkeystrokes": {}
     }
   }
 }
