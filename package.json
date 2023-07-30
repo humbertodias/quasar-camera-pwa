@@ -11,7 +11,8 @@
     "test": "echo \"No test specified\" && exit 0",
     "build": "quasar build",
     "build:pwa": "quasar build -m pwa",
-    "build:android": "quasar build -m android"
+    "build:android": "quasar build -m cordova -T android",
+    "clean": "rm -rf ./node_modules package-lock.json .cache dist"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",

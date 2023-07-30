@@ -1,7 +1,7 @@
 FROM node
 
 # Install Build Essentials
-RUN apt update && apt install sudo curl wget zip unzip build-essential file apt-utils jq -y
+RUN apt update && apt install sudo git curl wget zip unzip build-essential file apt-utils jq -y
 
 # non-root
 ENV USER=ci

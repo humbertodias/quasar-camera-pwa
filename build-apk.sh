@@ -1,14 +1,8 @@
-pwd && ls -lha
+npm install && \
+quasar build -m cordova -T android && \
 
 cd src-cordova && \
-pwd && ls -lha
+cordova plugin add https://github.com/keilyn3d/cordova-plugin-sendkeystrokes.git && \
+cordova build android && \
 
-ANDROID_VERSION=${1:-latest}
-cordova platform add android@$ANDROID_VERSION
-pwd && ls -lha && \
-cd platforms/android && \
-pwd && ls -lha && \
-gradle build
-
-pwd && ls -lha && \
 find . -name '*.apk'

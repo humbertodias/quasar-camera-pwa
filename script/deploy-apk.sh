@@ -9,11 +9,8 @@ change_app_version(){
 
 QENV="${1:-local}"
 
-PROJECT_DIR=$(pwd)
-echo "PROJECT_DIR=$PROJECT_DIR"
-
 change_app_version && \
 docker run -e QENV=$QENV \
--v $PROJECT_DIR:/tmp/quasar \
--w /tmp/quasar \
+-v $(pwd):/tmp/quasar-workdir \
+-w /tmp/quasar-workdir \
 hldtux/quasar-apk bash build-apk.sh
