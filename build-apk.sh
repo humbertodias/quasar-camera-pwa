@@ -8,4 +8,4 @@ docker run -e QENV=$QENV \
            -v /etc/hosts:/etc/hosts:ro \
            -w /home/quasar/workdir \
            --rm \
-           hldtux/quasar-apk bash -c "npm install ; quasar build -m capacitor -T android --debug"
+           hldtux/quasar-android-builder bash -c "npm install ; quasar build -m capacitor -T android --debug"
