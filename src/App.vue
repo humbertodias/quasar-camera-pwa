@@ -68,7 +68,7 @@ export default defineComponent({
     this.$bus.on('enter-event', (arg1, arg2, arg3) => {
       Notify.create('bus.enter-event')
     })
-    Notify.create('App.mounted')
+    Notify.create('App.mounted.')
   }
 })
 </script>
