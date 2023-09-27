@@ -12,7 +12,8 @@
     "build": "quasar build",
     "build:pwa": "quasar build -m pwa",
     "build:android": "quasar build -m cordova -T android",
-    "clean": "rm -rf ./node_modules package-lock.json .cache dist"
+    "pwa": "quasar dev -m pwa",
+    "clean": "rm -rf ./node_modules package-lock.json .cache dist .quasar"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
